@@ -11,11 +11,6 @@ public enum Option {
     private int value;
     private String description;
 
-    Option(int value , String description) {
-        this.value = value;
-        this.description = description;
-    }
-
     public int getValue() {
         return value;
     }
@@ -24,11 +19,18 @@ public enum Option {
         return description;
     }
 
+    Option(int value , String description) {
+        this.value = value;
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return value + "-" + description;
     }
 
+    /*Here we're catching the ArrayIndexOutOfBoundsException exception.
+    It can occur when someone gives e.g. a negative number or greater than 4.*/
     static Option createFromInt(int option) throws NoSuchOptionException {
         try {
             return Option.values()[option];

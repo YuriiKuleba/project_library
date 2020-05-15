@@ -6,14 +6,7 @@ public class Library {
     private int editionNumber;
     private Edition[] editions = new Edition[MAX_EDITIONS];
 
-    /*private final static int MAX_DISC = 100;
-    private CD[] cdS = new CD[MAX_DISC];
-    private int cdNumber = 0;
-
-    private final static int MAX_DLC = 100;
-    private StoreDLC[] dlcS = new StoreDLC[MAX_DLC];
-    private int dlcNumber = 0;*/
-
+    // a getter that shows us a copy of the array omitting the null value
     public Edition[] getEditions() {
         Edition[] result = new Edition[editionNumber];
         for (int i = 0 ; i < editionNumber ; i++) {
@@ -22,19 +15,22 @@ public class Library {
         return result;
     }
 
+    //can really be removed, but we leave it for readability.
     public void addDisc(CD cd) {
         addEditions(cd);
     }
 
+    //can really be removed, but we leave it for readability.
     public void addDLC(DLC dlc) {
         addEditions(dlc);
 
     }
 
-
+    // Method that add a new Edition
     private void addEditions(Edition edition) {
         if (editionNumber > MAX_EDITIONS) {
-            throw new ArrayIndexOutOfBoundsException("Max editions exceeded " + MAX_EDITIONS);
+            throw new ArrayIndexOutOfBoundsException("Max editions exceeded "
+                    + MAX_EDITIONS);
         }
         editions[editionNumber] = edition;
         editionNumber++;

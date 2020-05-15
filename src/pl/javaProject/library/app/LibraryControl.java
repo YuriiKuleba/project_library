@@ -12,22 +12,14 @@ import java.util.InputMismatchException;
 
 class LibraryControl {
 
-    // variables to control the program
-    private final static int EXIT = 0;
-    private final static int ADD_DISC = 1;
-    private final static int ADD_DLC = 2;
-    private final static int PRINT_DISC = 3;
-    private final static int PRINT_DLC = 4;
-
     // variable to communicate with the user
-    private ConsolePrinter consolePrinter = new ConsolePrinter();
-    private DataReader dataReader = new DataReader(consolePrinter);
+    private ConsolePrinter printer = new ConsolePrinter();
+    private DataReader dataReader = new DataReader(printer);
 
     // "library" storing data
     private Library library = new Library();
 
     //The main program method that allows selection of options and interaction
-
     public void controlLoop()
     {
         Option option;
@@ -52,12 +44,13 @@ class LibraryControl {
                             exit();
                             break;
                         default:
-                            System.out.println("Unknown option.Try again.");
+                            printer.printLine("Unknown option.Try again.");
                     }
         } while (option != Option.EXIT);
     }
 
-
+    /*Thanks to this, we can ask the user
+    over and over to enter the correct value.*/
     private Option getOption() {
         boolean optionOK = false;
         Option option = null;
@@ -66,9 +59,9 @@ class LibraryControl {
                 option = Option.createFromInt(dataReader.getInt());
                 optionOK = true;
             } catch (NoSuchOptionException e) {
-                consolePrinter.printLine(e.getMessage() + ", please provide again:");
+                printer.printLine(e.getMessage() + ", please provide again:");
             } catch (InputMismatchException e) {
-                consolePrinter.printLine("You entered a value that is not a number, please enter again:");
+                printer.printLine("You entered a value that is not a number, please enter again:");
             }
         }
         return option;
@@ -76,9 +69,9 @@ class LibraryControl {
 
 
     public void printOptions() {
-        System.out.println("Choose the option: ");
+        printer.printLine("Choose the option: ");
         for (Option option : Option.values()) {
-            System.out.println(option);
+            printer.printLine(option.toString());
         }
     }
 
@@ -87,16 +80,16 @@ class LibraryControl {
             CD cd = dataReader.readAndCreateDisc();
             library.addDisc(cd);
         } catch (InputMismatchException e) {
-            consolePrinter.printLine("Failed to create CD, invalid data");
+            printer.printLine("Failed to create CD, invalid data");
         } catch (ArrayIndexOutOfBoundsException e) {
-            consolePrinter.printLine("Capacity limit reached, no more CD can be added");
+            printer.printLine("Capacity limit reached, no more CD can be added");
         }
     }
 
     private void printDisc()
     {
         Edition[] editions = library.getEditions();
-        consolePrinter.printDiscs(editions);
+        printer.printDiscs(editions);
     }
 
     private void addDLC() {
@@ -104,21 +97,21 @@ class LibraryControl {
             DLC dlc = dataReader.readAndCreateStore();
             library.addDLC(dlc);
         } catch (InputMismatchException e) {
-            consolePrinter.printLine("Failed to create DLC, invalid data");
+            printer.printLine("Failed to create DLC, invalid data");
         } catch (ArrayIndexOutOfBoundsException e) {
-            consolePrinter.printLine("Capacity limit reached, no more DLC can be added");
+            printer.printLine("Capacity limit reached, no more DLC can be added");
         }
     }
 
     private void printDLC() {
 
         Edition[] editions = library.getEditions();
-        consolePrinter.printDLC(editions);
+        printer.printDLC(editions);
     }
 
     private void exit()
     {
-        System.out.println("End of the program.Bye!");
+        printer.printLine("End of the program.Bye!");
         dataReader.close();
     }
 

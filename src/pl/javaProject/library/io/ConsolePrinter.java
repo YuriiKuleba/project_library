@@ -6,6 +6,7 @@ import pl.javaProject.library.model.Edition;
 
 public class ConsolePrinter {
 
+
     public void printDiscs(Edition[] editions)
     {
         int countCD = 0;
@@ -32,7 +33,8 @@ public class ConsolePrinter {
             printLine("DLC library is empty");
     }
 
-
+    //it will make the System.out.println () method
+    // appear only once in our entire program
     public void printLine(String text) {
         System.out.println(text);
     }

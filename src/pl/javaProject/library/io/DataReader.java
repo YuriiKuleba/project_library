@@ -8,10 +8,16 @@ import java.util.Scanner;
 public class DataReader {
 
     private Scanner sc = new Scanner(System.in);
-    private ConsolePrinter consolePrinter;
+    /*Displaying messages now through a ConsolePrinter object,
+    not directly by the printer.printLine () method.*/
+    private ConsolePrinter printer;
 
-    public DataReader(ConsolePrinter consolePrinter) {
-        this.consolePrinter = consolePrinter;
+    /*We pass the ConsolePrinter object in the constructor,
+    instead of creating it manually. As a result,
+    there will be only one ConsolePrinter object in the application
+    that we create in the LibraryControl class.*/
+    public DataReader(ConsolePrinter printer) {
+        this.printer = printer;
     }
 
     public void close()
@@ -19,6 +25,21 @@ public class DataReader {
         sc.close();
     }
 
+    /*The finally block is needed because regardless of whether
+    someone enters the correct number or something incorrect,
+    we must get rid of the input stream or the enter character,
+    or an invalid value.
+    The try-finally block used is simply a shortened version of such try-catch block:
+
+    public int getInt() {
+    try {
+        return sc.nextInt();
+    } catch (InputMismatchException e) {
+        throw e;
+    } finally {
+        sc.nextLine();
+    }
+}*/
     public int getInt()
     {
         try {
@@ -30,18 +51,18 @@ public class DataReader {
 
     public CD readAndCreateDisc()
     {
-        System.out.println("Title: ");
+        printer.printLine("Title: ");
         String title = sc.nextLine();
-        System.out.println("Developer: ");
+        printer.printLine("Developer: ");
         String developer = sc.nextLine();
-        System.out.println("Publisher: ");
+        printer.printLine("Publisher: ");
         String publisher = sc.nextLine();
-        System.out.println("CUSA number: ");
+        printer.printLine("CUSA number: ");
         String serialNumber = sc.nextLine();
-        System.out.println("Language: ");
+        printer.printLine("Language: ");
         String language = sc.nextLine();
-        System.out.println("Release date: ");
-        int releaseDate = sc.nextInt();
+        printer.printLine("Release date: ");
+        int releaseDate = getInt();
 
         CD cd = new CD(title , developer , publisher , serialNumber , language , releaseDate);
         return cd;
@@ -49,15 +70,15 @@ public class DataReader {
 
 
     public DLC readAndCreateStore() {
-        System.out.println("Title: ");
+        printer.printLine("Title: ");
         String title = sc.nextLine();
-        System.out.println("DLC: ");
+        printer.printLine("DLC: ");
         String dlc = sc.nextLine();
-        System.out.println("Day: ");
+        printer.printLine("Day: ");
         int day = getInt();
-        System.out.println("Month: ");
+        printer.printLine("Month: ");
         int month = getInt();
-        System.out.println("Year: ");
+        printer.printLine("Year: ");
         int year = getInt();
 
         return new DLC(title , dlc , day , month , year);
