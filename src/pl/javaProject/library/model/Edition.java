@@ -1,10 +1,11 @@
 package pl.javaProject.library.model;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 // Editions: GOTY, Gold, OneDay , SteelBook, Deluxe, Digital etc.
-public abstract class Edition {
+public abstract class Edition implements Serializable {
 
     private String title;
     private int year;

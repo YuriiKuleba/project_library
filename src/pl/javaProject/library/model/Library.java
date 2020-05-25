@@ -1,6 +1,8 @@
 package pl.javaProject.library.model;
 
-public class Library {
+import java.io.Serializable;
+
+public class Library implements Serializable {
 
     private final static int MAX_EDITIONS = 200;
     private int editionNumber;

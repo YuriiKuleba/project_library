@@ -1,8 +1,12 @@
 package pl.javaProject.library.app;
 
+import pl.javaProject.library.exeptions.DataExportException;
+import pl.javaProject.library.exeptions.DataImportException;
 import pl.javaProject.library.exeptions.NoSuchOptionException;
 import pl.javaProject.library.io.ConsolePrinter;
 import pl.javaProject.library.io.DataReader;
+import pl.javaProject.library.io.file.FileManager;
+import pl.javaProject.library.io.file.FileManagerBuilder;
 import pl.javaProject.library.model.CD;
 import pl.javaProject.library.model.DLC;
 import pl.javaProject.library.model.Edition;
@@ -15,37 +19,50 @@ class LibraryControl {
     // variable to communicate with the user
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
+    private FileManager fileManager;
 
     // "library" storing data
-    private Library library = new Library();
+    private Library library;
+
+    LibraryControl() {
+        fileManager = new FileManagerBuilder(printer , dataReader).build();
+        try {
+            library = fileManager.importData();
+            printer.printLine("Imported data from a file");
+        } catch (DataImportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("A new base has been initiated.");
+            library = new Library();
+        }
+    }
 
     //The main program method that allows selection of options and interaction
-    public void controlLoop()
+    void controlLoop()
     {
         Option option;
 
         do {
             printOptions();
             option = getOption();
-                    switch (option) {
-                        case ADD_DISC:
-                            addDisc();
-                            break;
-                        case ADD_DLC:
-                            addDLC();
-                            break;
-                        case PRINT_DISC:
-                            printDisc();
-                            break;
-                        case PRINT_DLC:
-                            printDLC();
-                            break;
-                        case EXIT:
-                            exit();
-                            break;
-                        default:
-                            printer.printLine("Unknown option.Try again.");
-                    }
+            switch (option) {
+                case ADD_DISC:
+                    addDisc();
+                    break;
+                case ADD_DLC:
+                    addDLC();
+                    break;
+                case PRINT_DISC:
+                    printDisc();
+                    break;
+                case PRINT_DLC:
+                    printDLC();
+                    break;
+                case EXIT:
+                    exit();
+                    break;
+                default:
+                    printer.printLine("Unknown option.Try again.");
+            }
         } while (option != Option.EXIT);
     }
 
@@ -111,8 +128,14 @@ class LibraryControl {
 
     private void exit()
     {
-        printer.printLine("End of the program.Bye!");
+        try {
+            fileManager.exportData(library);
+            printer.printLine("Data export to file successful");
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+        }
         dataReader.close();
+        printer.printLine("End of the program.Bye!");
     }
 
 
@@ -152,6 +175,4 @@ class LibraryControl {
         }
 
     }
-
-
 }
