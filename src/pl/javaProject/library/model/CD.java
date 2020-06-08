@@ -5,35 +5,23 @@ import java.util.Objects;
 // CD games
 public class CD extends Edition {
 
+    public static final String TYPE = "Game";
+
+    @Override
+    public String toCsv() {
+        return (TYPE + ";") +
+                getTitle() + ";" +
+                developer + ";" +
+                publisher + ";" +
+                serialNumber + ";" +
+                language + ";" +
+                getYear() + "";
+    }
+
     private String developer;
     private String publisher;
     private String serialNumber;
     private String language;
-    ;
-
-    /*
-
-    public CD(String title , String developer , String publisher , String serialNumber , String language , int releaseDate)
-    {
-        this(title , developer , publisher , serialNumber , language);
-        if (releaseDate > 2013)
-        {
-            this.releaseDate = releaseDate;
-        } else
-        {
-            System.out.println("Incorrect date inside the constructor,it must be higher then 2013");
-        }
-    }
-
-    public CD(String title , String developer , String publisher , String serialNumber , String language)
-    {
-        this.title = title;
-        this.developer = developer;
-        this.publisher = publisher;
-        this.serialNumber = serialNumber;
-        this.language = language;
-    }
-*/
 
     public CD(String title , String developer , String publisher , String serialNumber , String language , int year) {
         super(title , year);
@@ -43,15 +31,6 @@ public class CD extends Edition {
         this.language = language;
     }
 
-    /* public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }*/
 
     public String getDeveloper()
     {
@@ -93,26 +72,11 @@ public class CD extends Edition {
         this.language = language;
     }
 
-    /*  public int getReleaseDate()
-    {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(int releaseDate)
-    {
-        if (releaseDate > 2013) {
-            this.releaseDate = releaseDate;
-        } else {
-            System.out.println("You trying to set an incorrect releaseDate outside the constructor. Must be higher then 2013");
-
-        }
-
-    }*/
 
     @Override
     public String toString() {
         return getTitle() + "; " + developer + "; " + publisher
-                + "; " + serialNumber + "; " + language + "; " +     getYear();
+                + "; " + serialNumber + "; " + language + "; " + getYear();
     }
 
     @Override

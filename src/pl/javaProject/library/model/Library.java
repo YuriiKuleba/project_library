@@ -29,7 +29,7 @@ public class Library implements Serializable {
     }
 
     // Method that add a new Edition
-    private void addEditions(Edition edition) {
+    public void addEditions(Edition edition) {
         if (editionNumber > MAX_EDITIONS) {
             throw new ArrayIndexOutOfBoundsException("Max editions exceeded "
                     + MAX_EDITIONS);

@@ -7,6 +7,8 @@ import java.util.Objects;
 // Editions: GOTY, Gold, OneDay , SteelBook, Deluxe, Digital etc.
 public abstract class Edition implements Serializable {
 
+    public abstract String toCsv();
+
     private String title;
     private int year;
 

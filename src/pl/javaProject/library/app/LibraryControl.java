@@ -2,6 +2,7 @@ package pl.javaProject.library.app;
 
 import pl.javaProject.library.exeptions.DataExportException;
 import pl.javaProject.library.exeptions.DataImportException;
+import pl.javaProject.library.exeptions.InvalidDataException;
 import pl.javaProject.library.exeptions.NoSuchOptionException;
 import pl.javaProject.library.io.ConsolePrinter;
 import pl.javaProject.library.io.DataReader;
@@ -29,7 +30,7 @@ class LibraryControl {
         try {
             library = fileManager.importData();
             printer.printLine("Imported data from a file");
-        } catch (DataImportException e) {
+        } catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("A new base has been initiated.");
             library = new Library();
@@ -95,7 +96,7 @@ class LibraryControl {
     private void addDisc() {
         try {
             CD cd = dataReader.readAndCreateDisc();
-            library.addDisc(cd);
+            library.addEditions(cd);
         } catch (InputMismatchException e) {
             printer.printLine("Failed to create CD, invalid data");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -112,7 +113,7 @@ class LibraryControl {
     private void addDLC() {
         try {
             DLC dlc = dataReader.readAndCreateStore();
-            library.addDLC(dlc);
+            library.addEditions(dlc);
         } catch (InputMismatchException e) {
             printer.printLine("Failed to create DLC, invalid data");
         } catch (ArrayIndexOutOfBoundsException e) {

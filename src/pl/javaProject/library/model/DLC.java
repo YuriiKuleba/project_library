@@ -4,6 +4,19 @@ import java.util.Objects;
 
 // DLC for games
 public class DLC extends Edition {
+
+    public static final String TYPE = "GameDLC";
+
+    @Override
+    public String toCsv() {
+        return (TYPE + ";") +
+                getTitle() + ";" +
+                dlc + ";" +
+                day + ";" +
+                month + ";" +
+                getYear() + "";
+    }
+
     private String dlc;
     private int day;
     private int month;
