@@ -3,7 +3,7 @@ package pl.javaProject.library.io.file;
 import pl.javaProject.library.exeptions.DataExportException;
 import pl.javaProject.library.exeptions.DataImportException;
 import pl.javaProject.library.exeptions.InvalidDataException;
-import pl.javaProject.library.model.CD;
+import pl.javaProject.library.model.Game;
 import pl.javaProject.library.model.DLC;
 import pl.javaProject.library.model.Edition;
 import pl.javaProject.library.model.Library;
@@ -52,7 +52,7 @@ public class CsvFileManager implements FileManager {
     private Edition createObjectFromString(String csvText) {
         String[] split = csvText.split(";");
         String type = split[0];
-        if (CD.TYPE.equals(type)) {
+        if (Game.TYPE.equals(type)) {
             return createCD(split);
         } else if (DLC.TYPE.equals(type)) {
             return createDLC(split);
@@ -60,7 +60,7 @@ public class CsvFileManager implements FileManager {
         throw new InvalidDataException("Unknown publication type: " + type);
     }
 
-    private CD createCD(String[] data) {
+    private Game createCD(String[] data) {
         String title = data[1];
         String publisher = data[2];
         String developer = data[3];
@@ -68,7 +68,7 @@ public class CsvFileManager implements FileManager {
         String language = data[5];
         int year = Integer.parseInt(data[6]);
 
-        return new CD(title , publisher , developer , serialNumber , language , year);
+        return new Game(title , publisher , developer , serialNumber , language , year);
     }
 
     private DLC createDLC(String[] data) {

@@ -1,17 +1,17 @@
 package pl.javaProject.library.io;
 
-import pl.javaProject.library.model.CD;
+import pl.javaProject.library.model.Game;
 import pl.javaProject.library.model.DLC;
 import pl.javaProject.library.model.Edition;
 
 public class ConsolePrinter {
 
 
-    public void printDiscs(Edition[] editions)
+    public void printGames(Edition[] editions)
     {
         int countCD = 0;
         for (Edition edition : editions) {
-            if (edition instanceof CD) {
+            if (edition instanceof Game) {
                 printLine(edition.toString());
                 countCD++;
             }

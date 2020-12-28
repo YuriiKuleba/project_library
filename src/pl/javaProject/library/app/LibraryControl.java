@@ -8,7 +8,7 @@ import pl.javaProject.library.io.ConsolePrinter;
 import pl.javaProject.library.io.DataReader;
 import pl.javaProject.library.io.file.FileManager;
 import pl.javaProject.library.io.file.FileManagerBuilder;
-import pl.javaProject.library.model.CD;
+import pl.javaProject.library.model.Game;
 import pl.javaProject.library.model.DLC;
 import pl.javaProject.library.model.Edition;
 import pl.javaProject.library.model.Library;
@@ -47,13 +47,13 @@ class LibraryControl {
             option = getOption();
             switch (option) {
                 case ADD_DISC:
-                    addDisc();
+                    addGame();
                     break;
                 case ADD_DLC:
                     addDLC();
                     break;
                 case PRINT_DISC:
-                    printDisc();
+                    printGames();
                     break;
                 case PRINT_DLC:
                     printDLC();
@@ -93,10 +93,10 @@ class LibraryControl {
         }
     }
 
-    private void addDisc() {
+    private void addGame() {
         try {
-            CD cd = dataReader.readAndCreateDisc();
-            library.addEditions(cd);
+            Game game = dataReader.readAndCreateDisc();
+            library.addEditions(game);
         } catch (InputMismatchException e) {
             printer.printLine("Failed to create CD, invalid data");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -104,10 +104,10 @@ class LibraryControl {
         }
     }
 
-    private void printDisc()
+    private void printGames()
     {
         Edition[] editions = library.getEditions();
-        printer.printDiscs(editions);
+        printer.printGames(editions);
     }
 
     private void addDLC() {

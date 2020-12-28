@@ -1,6 +1,6 @@
 package pl.javaProject.library.io;
 
-import pl.javaProject.library.model.CD;
+import pl.javaProject.library.model.Game;
 import pl.javaProject.library.model.DLC;
 
 import java.util.Scanner;
@@ -54,7 +54,7 @@ public class DataReader {
         }
     }
 
-    public CD readAndCreateDisc()
+    public Game readAndCreateDisc()
     {
         printer.printLine("Title: ");
         String title = sc.nextLine();
@@ -69,8 +69,8 @@ public class DataReader {
         printer.printLine("Release date: ");
         int releaseDate = getInt();
 
-        CD cd = new CD(title , developer , publisher , serialNumber , language , releaseDate);
-        return cd;
+        Game game = new Game(title , developer , publisher , serialNumber , language , releaseDate);
+        return game;
     }
 
 

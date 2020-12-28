@@ -19,8 +19,8 @@ public class Library implements Serializable {
     }
 
     //can really be removed, but we leave it for readability.
-    public void addDisc(CD cd) {
-        addEditions(cd);
+    public void addGames(Game game) {
+        addEditions(game);
     }
 
     //can really be removed, but we leave it for readability.

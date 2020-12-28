@@ -3,7 +3,7 @@ package pl.javaProject.library.model;
 import java.util.Objects;
 
 // CD games
-public class CD extends Edition {
+public class Game extends Edition {
 
     public static final String TYPE = "Game";
 
@@ -23,7 +23,7 @@ public class CD extends Edition {
     private String serialNumber;
     private String language;
 
-    public CD(String title , String developer , String publisher , String serialNumber , String language , int year) {
+    public Game(String title , String developer , String publisher , String serialNumber , String language , int year) {
         super(title , year);
         this.developer = developer;
         this.publisher = publisher;
@@ -84,11 +84,11 @@ public class CD extends Edition {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CD cd = (CD) o;
-        return Objects.equals(getDeveloper() , cd.getDeveloper()) &&
-                Objects.equals(getPublisher() , cd.getPublisher()) &&
-                Objects.equals(getSerialNumber() , cd.getSerialNumber()) &&
-                Objects.equals(getLanguage() , cd.getLanguage());
+        Game game = (Game) o;
+        return Objects.equals(getDeveloper() , game.getDeveloper()) &&
+                Objects.equals(getPublisher() , game.getPublisher()) &&
+                Objects.equals(getSerialNumber() , game.getSerialNumber()) &&
+                Objects.equals(getLanguage() , game.getLanguage());
     }
 
     @Override
