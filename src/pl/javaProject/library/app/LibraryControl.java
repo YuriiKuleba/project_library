@@ -17,7 +17,7 @@ import java.util.InputMismatchException;
 
 class LibraryControl {
 
-    // variable to communicate with the user
+    // variable for communication with the user
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
     private FileManager fileManager;

@@ -11,6 +11,7 @@ public class Library implements Serializable {
     // a getter that shows us a copy of the array omitting the null value
     public Edition[] getEditions() {
         Edition[] result = new Edition[editionNumber];
+        // *from Java 15* if (editionNumber >= 0) System.arraycopy(editions , 0 , result , 0 , editionNumber);
         for (int i = 0 ; i < editionNumber ; i++) {
             result[i] = editions[i];
         }

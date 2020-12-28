@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class DataReader {
 
     private Scanner sc = new Scanner(System.in);
+
     /*Displaying messages now through a ConsolePrinter object,
     not directly by the printer.printLine () method.*/
     private ConsolePrinter printer;
